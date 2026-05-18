@@ -3,18 +3,46 @@
   <p>{{ intro }}</p>
 
   <div class="group">
-    @for (group of reportGroups; track group.label) {
-      <div class="section-card">
-        <div class="badge">{{ group.label }}</div>
+    <div class="section-card">
+      <div class="badge">{{ reportGroups[0]?.label }}</div>
 
-        @for (report of group.reports; track report.path) {
-          <div class="card">
-            <a [routerLink]="report.path">{{ report.date }}｜{{ report.title }}</a>
-            <div class="meta">{{ report.summary }}</div>
-          </div>
-        }
-      </div>
-    }
+      @if (monthGroups.length > 0) {
+        <div class="tabs">
+          @for (monthGroup of monthGroups; let monthIndex = $index; track monthGroup.month) {
+            <button
+              type="button"
+              class="tab"
+              [class.active]="activeMonthIndex === monthIndex"
+              (click)="selectMonth(monthIndex)"
+            >
+              {{ monthGroup.label }}
+            </button>
+          }
+        </div>
+      }
+
+      @for (report of pagedReports; track report.path) {
+        <div class="card">
+          <a [routerLink]="report.path">{{ report.date }}｜{{ report.title }}</a>
+          <div class="meta">{{ report.summary }}</div>
+        </div>
+      }
+
+      @if (totalPages > 1) {
+        <div class="pager">
+          @for (page of pageNumbers; let pageIndex = $index; track page) {
+            <button
+              type="button"
+              class="pager-button"
+              [class.active]="activePageIndex === pageIndex"
+              (click)="selectPage(pageIndex)"
+            >
+              {{ page }}
+            </button>
+          }
+        </div>
+      }
+    </div>
   </div>
 
   <a class="back" routerLink="/" replaceUrl>← 返回市場報告首頁</a>

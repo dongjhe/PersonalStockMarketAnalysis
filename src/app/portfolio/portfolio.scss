@@ -44,6 +44,45 @@ p {
   box-shadow: var(--shadow-soft);
 }
 
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 24px 0 16px;
+}
+
+.month-heading {
+  margin: 0 0 18px;
+  font-size: 18px;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.tab,
+.pager-button {
+  border: 1px solid var(--line-strong);
+  background: var(--bg-soft);
+  color: var(--text);
+  padding: 10px 16px;
+  margin-right: 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.16s ease-in-out;
+}
+
+.tab:hover,
+.pager-button:hover {
+  transform: translateY(-1px);
+}
+
+.tab.active,
+.pager-button.active {
+  background: var(--gold);
+  color: #fff;
+  border-color: transparent;
+}
+
 .card {
   background: linear-gradient(180deg, #fffdfa 0%, #fff8f1 100%);
   border: 1px solid var(--line-strong);

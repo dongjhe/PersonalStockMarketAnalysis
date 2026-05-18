@@ -13,6 +13,12 @@ type PortfolioReportGroup = {
   reports: PortfolioReport[];
 };
 
+type PortfolioReportMonthGroup = {
+  month: string;
+  label: string;
+  reports: PortfolioReport[];
+};
+
 @Component({
   selector: 'app-portfolio',
   imports: [RouterLink],
@@ -22,6 +28,8 @@ type PortfolioReportGroup = {
 export class Portfolio {
   readonly intro =
     '這裡整理庫存分析報告；清單資料集中放在 portfolio.ts，新增報告時只要補資料即可。';
+
+  readonly pageSize = 10;
 
   readonly reportGroups: PortfolioReportGroup[] = [
     {
@@ -80,4 +88,62 @@ export class Portfolio {
       ],
     },
   ];
+
+  readonly monthGroups: PortfolioReportMonthGroup[] = this.groupReportsByMonth(
+    this.reportGroups[0]?.reports ?? [],
+  );
+
+  activeMonthIndex = 0;
+  activePageIndex = 0;
+
+  private groupReportsByMonth(reports: PortfolioReport[]): PortfolioReportMonthGroup[] {
+    const groupMap = new Map<string, PortfolioReport[]>();
+
+    for (const report of reports) {
+      const month = report.date.slice(0, 7);
+      const existing = groupMap.get(month);
+      if (existing) {
+        existing.push(report);
+      } else {
+        groupMap.set(month, [report]);
+      }
+    }
+
+    return Array.from(groupMap.entries()).map(([month, reports]) => ({
+      month,
+      label: this.formatMonthLabel(month),
+      reports,
+    }));
+  }
+
+  private formatMonthLabel(month: string): string {
+    const [year, monthNumber] = month.split('-');
+    return `${year} 年 ${monthNumber} 月`;
+  }
+
+  get activeMonthGroup(): PortfolioReportMonthGroup {
+    return this.monthGroups[this.activeMonthIndex];
+  }
+
+  get totalPages(): number {
+    return Math.max(1, Math.ceil(this.activeMonthGroup.reports.length / this.pageSize));
+  }
+
+  get pageNumbers(): number[] {
+    return Array.from({ length: this.totalPages }, (_, index) => index + 1);
+  }
+
+  get pagedReports(): PortfolioReport[] {
+    const start = this.activePageIndex * this.pageSize;
+    return this.activeMonthGroup.reports.slice(start, start + this.pageSize);
+  }
+
+  selectMonth(index: number): void {
+    this.activeMonthIndex = index;
+    this.activePageIndex = 0;
+  }
+
+  selectPage(index: number): void {
+    this.activePageIndex = index;
+  }
 }
