@@ -8,9 +8,14 @@ import { ArkInventoryWaterLevel20260508 } from './report-detail/ark-inventory-wa
 import { ArkInventoryWaterLevel20260511 } from './report-detail/ark-inventory-water-level-20260511/ark-inventory-water-level-20260511';
 import { ArkInventoryWaterLevel20260512 } from './report-detail/ark-inventory-water-level-20260512/ark-inventory-water-level-20260512';
 import { ArkInventoryWaterLevel20260516 } from './report-detail/ark-inventory-water-level-20260516/ark-inventory-water-level-20260516';
+import { ArkInventoryWaterLevel20260518 } from './report-detail/ark-inventory-water-level-20260518/ark-inventory-water-level-20260518';
 
 export const portfolioRoutes: Routes = [
   { path: 'portfolio', component: Portfolio },
+  {
+    path: 'portfolio/ark-inventory-water-level-20260518',
+    component: ArkInventoryWaterLevel20260518,
+  },
   {
     path: 'portfolio/ark-inventory-water-level-20260516',
     component: ArkInventoryWaterLevel20260516,
