@@ -1,17 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Report, ReportGroup, ReportPaginationHelper } from '../shared/report-utils';
 
-type PortfolioReport = {
-  title: string;
-  date: string;
-  path: string;
-  summary: string;
-};
-
-type PortfolioReportGroup = {
-  label: string;
-  reports: PortfolioReport[];
-};
+type PortfolioReportGroup = ReportGroup;
 
 @Component({
   selector: 'app-stocks',
@@ -21,6 +12,9 @@ type PortfolioReportGroup = {
 })
 export class Stocks {
   readonly intro = '這裡集中所有個股專頁。';
+
+  readonly pageSize = 10;
+  activePageIndex = 0;
 
   readonly reportGroups: PortfolioReportGroup[] = [
     {
@@ -66,4 +60,23 @@ export class Stocks {
       ],
     },
   ];
+
+  get totalPages(): number {
+    const reports = this.reportGroups[0]?.reports ?? [];
+    return ReportPaginationHelper.getTotalPages(reports, this.pageSize);
+  }
+
+  get pageNumbers(): number[] {
+    const reports = this.reportGroups[0]?.reports ?? [];
+    return ReportPaginationHelper.getPageNumbers(reports, this.pageSize);
+  }
+
+  get pagedReports(): Report[] {
+    const reports = this.reportGroups[0]?.reports ?? [];
+    return ReportPaginationHelper.getPagedReports(reports, this.activePageIndex, this.pageSize);
+  }
+
+  selectPage(index: number): void {
+    this.activePageIndex = index;
+  }
 }

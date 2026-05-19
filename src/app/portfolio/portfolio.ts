@@ -1,23 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import {
+  Report,
+  ReportGroup,
+  ReportMonthGroup,
+  ReportPaginationHelper,
+} from '../shared/report-utils';
 
-type PortfolioReport = {
-  title: string;
-  date: string;
-  path: string;
-  summary: string;
-};
-
-type PortfolioReportGroup = {
-  label: string;
-  reports: PortfolioReport[];
-};
-
-type PortfolioReportMonthGroup = {
-  month: string;
-  label: string;
-  reports: PortfolioReport[];
-};
+type PortfolioReportGroup = ReportGroup;
+type PortfolioReportMonthGroup = ReportMonthGroup;
 
 @Component({
   selector: 'app-portfolio',
@@ -89,53 +80,31 @@ export class Portfolio {
     },
   ];
 
-  readonly monthGroups: PortfolioReportMonthGroup[] = this.groupReportsByMonth(
+  readonly monthGroups: PortfolioReportMonthGroup[] = ReportPaginationHelper.groupReportsByMonth(
     this.reportGroups[0]?.reports ?? [],
   );
 
   activeMonthIndex = 0;
   activePageIndex = 0;
 
-  private groupReportsByMonth(reports: PortfolioReport[]): PortfolioReportMonthGroup[] {
-    const groupMap = new Map<string, PortfolioReport[]>();
-
-    for (const report of reports) {
-      const month = report.date.slice(0, 7);
-      const existing = groupMap.get(month);
-      if (existing) {
-        existing.push(report);
-      } else {
-        groupMap.set(month, [report]);
-      }
-    }
-
-    return Array.from(groupMap.entries()).map(([month, reports]) => ({
-      month,
-      label: this.formatMonthLabel(month),
-      reports,
-    }));
-  }
-
-  private formatMonthLabel(month: string): string {
-    const [year, monthNumber] = month.split('-');
-    return `${year} 年 ${monthNumber} 月`;
-  }
-
   get activeMonthGroup(): PortfolioReportMonthGroup {
     return this.monthGroups[this.activeMonthIndex];
   }
 
   get totalPages(): number {
-    return Math.max(1, Math.ceil(this.activeMonthGroup.reports.length / this.pageSize));
+    return ReportPaginationHelper.getTotalPages(this.activeMonthGroup.reports, this.pageSize);
   }
 
   get pageNumbers(): number[] {
-    return Array.from({ length: this.totalPages }, (_, index) => index + 1);
+    return ReportPaginationHelper.getPageNumbers(this.activeMonthGroup.reports, this.pageSize);
   }
 
-  get pagedReports(): PortfolioReport[] {
-    const start = this.activePageIndex * this.pageSize;
-    return this.activeMonthGroup.reports.slice(start, start + this.pageSize);
+  get pagedReports(): Report[] {
+    return ReportPaginationHelper.getPagedReports(
+      this.activeMonthGroup.reports,
+      this.activePageIndex,
+      this.pageSize,
+    );
   }
 
   selectMonth(index: number): void {

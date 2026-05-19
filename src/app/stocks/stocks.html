@@ -6,10 +6,25 @@
       <div class="section-card">
         <div class="badge">{{ group.label }}</div>
 
-        @for (report of group.reports; track report.path) {
+        @for (report of pagedReports; track report.path) {
           <div class="card">
             <a [routerLink]="report.path">{{ report.date }}｜{{ report.title }}</a>
             <div class="meta">{{ report.summary }}</div>
+          </div>
+        }
+
+        @if (totalPages > 1) {
+          <div class="pager">
+            @for (page of pageNumbers; let pageIndex = $index; track page) {
+              <button
+                type="button"
+                class="pager-button"
+                [class.active]="activePageIndex === pageIndex"
+                (click)="selectPage(pageIndex)"
+              >
+                {{ page }}
+              </button>
+            }
           </div>
         }
       </div>
