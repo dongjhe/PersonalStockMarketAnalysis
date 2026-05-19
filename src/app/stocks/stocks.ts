@@ -27,6 +27,12 @@ export class Stocks {
       label: '一般庫存分析',
       reports: [
         {
+          title: '華通 (2313) 產業策略白皮書',
+          date: '2026-05-19',
+          path: '/stocks/2313-compeq-industry-whitepaper-20260519',
+          summary: '依最新股價、2025 年報、2026 Q1 財報、低軌衛星、AI 伺服器與光模組成長主軸製作。',
+        },
+        {
           title: 'CEG Constellation Energy 產業策略白皮書',
           date: '2026-05-11',
           path: '/stocks/ceg-industry-whitepaper-20260511',
