@@ -1,8 +1,27 @@
 <div class="wrap">
   <h1>個股專頁</h1>
   <p>{{ intro }}</p>
+  <div class="tabs">
+    <button
+      type="button"
+      class="tab"
+      [class.active]="activeRegion === 'TW'"
+      (click)="selectRegion('TW')"
+    >
+      台股
+    </button>
+    <button
+      type="button"
+      class="tab"
+      [class.active]="activeRegion === 'US'"
+      (click)="selectRegion('US')"
+    >
+      美股
+    </button>
+  </div>
+
   <div class="group">
-    @for (group of reportGroups; track group.label) {
+    @for (group of activeReportGroups; track group.label) {
       <div class="section-card">
         <div class="badge">{{ group.label }}</div>
 

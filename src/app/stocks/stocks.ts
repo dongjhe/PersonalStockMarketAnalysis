@@ -4,6 +4,10 @@ import { Report, ReportGroup, ReportPaginationHelper } from '../shared/report-ut
 
 type PortfolioReportGroup = ReportGroup;
 
+interface StockReportGroup extends PortfolioReportGroup {
+  region: 'TW' | 'US';
+}
+
 @Component({
   selector: 'app-stocks',
   imports: [RouterLink],
@@ -15,9 +19,11 @@ export class Stocks {
 
   readonly pageSize = 10;
   activePageIndex = 0;
+  activeRegion: 'TW' | 'US' = 'TW';
 
-  readonly reportGroups: PortfolioReportGroup[] = [
+  readonly reportGroups: StockReportGroup[] = [
     {
+      region: 'TW',
       label: '一般庫存分析',
       reports: [
         {
@@ -27,16 +33,34 @@ export class Stocks {
           summary: '依 2025 年報、2026 Q1 法說、AI 伺服器導軌、機櫃升級與北美產能佈局製作。',
         },
         {
-          title: 'DPRO Draganfly 產業策略白皮書',
-          date: '2026-05-22',
-          path: '/stocks/dpro-industry-whitepaper-20260522',
-          summary: '依最新 Q1 2026 財報、國防/C-UAS 訂單、FPV 與公共安全應用動能製作。',
-        },
-        {
           title: '華通 (2313) 產業策略白皮書',
           date: '2026-05-19',
           path: '/stocks/2313-compeq-industry-whitepaper-20260519',
           summary: '依最新股價、2025 年報、2026 Q1 財報、低軌衛星、AI 伺服器與光模組成長主軸製作。',
+        },
+        {
+          title: '聯詠 (4916) 產業策略白皮書',
+          date: '2026-05-10',
+          path: '/stocks/4916-novatek-industry-whitepaper-20260510',
+          summary: '依最新股價、Q1 2026 財報、4 月營收、三年財務趨勢與顯示驅動 IC 復甦狀況製作。',
+        },
+        {
+          title: '台積電 (2330) 產業策略白皮書',
+          date: '2026-05-07',
+          path: '/stocks/2330-tsmc-industry-whitepaper-20260507',
+          summary: '依最新股價、近三年財報、AI 需求、先進製程與方舟庫存框架製作。',
+        },
+      ],
+    },
+    {
+      region: 'US',
+      label: '一般庫存分析',
+      reports: [
+        {
+          title: 'DPRO Draganfly 產業策略白皮書',
+          date: '2026-05-22',
+          path: '/stocks/dpro-industry-whitepaper-20260522',
+          summary: '依最新 Q1 2026 財報、國防/C-UAS 訂單、FPV 與公共安全應用動能製作。',
         },
         {
           title: 'CEG Constellation Energy 產業策略白皮書',
@@ -44,12 +68,6 @@ export class Stocks {
           path: '/stocks/ceg-industry-whitepaper-20260511',
           summary:
             '依最新股價、Q1 2026 8-K、2025 年報、Calpine 整合、資料中心需求與核能基載優勢製作。',
-        },
-        {
-          title: '聯詠 (4916) 產業策略白皮書',
-          date: '2026-05-10',
-          path: '/stocks/4916-novatek-industry-whitepaper-20260510',
-          summary: '依最新股價、Q1 2026 財報、4 月營收、三年財務趨勢與顯示驅動 IC 復甦狀況製作。',
         },
         {
           title: 'TSLA Tesla 產業策略白皮書',
@@ -63,29 +81,37 @@ export class Stocks {
           path: '/stocks/bksy-industry-whitepaper-20260507',
           summary: '依最新 Q1 2026 財報、新合約、Gen-3 衛星、國防 ISR 需求與股價波動製作。',
         },
-        {
-          title: '台積電 (2330) 產業策略白皮書',
-          date: '2026-05-07',
-          path: '/stocks/2330-tsmc-industry-whitepaper-20260507',
-          summary: '依最新股價、近三年財報、AI 需求、先進製程與方舟庫存框架製作。',
-        },
       ],
     },
   ];
 
+  get activeReportGroups(): StockReportGroup[] {
+    return this.reportGroups.filter((group) => group.region === this.activeRegion);
+  }
+
+  get currentReports(): Report[] {
+    return this.activeReportGroups[0]?.reports ?? [];
+  }
+
   get totalPages(): number {
-    const reports = this.reportGroups[0]?.reports ?? [];
-    return ReportPaginationHelper.getTotalPages(reports, this.pageSize);
+    return ReportPaginationHelper.getTotalPages(this.currentReports, this.pageSize);
   }
 
   get pageNumbers(): number[] {
-    const reports = this.reportGroups[0]?.reports ?? [];
-    return ReportPaginationHelper.getPageNumbers(reports, this.pageSize);
+    return ReportPaginationHelper.getPageNumbers(this.currentReports, this.pageSize);
   }
 
   get pagedReports(): Report[] {
-    const reports = this.reportGroups[0]?.reports ?? [];
-    return ReportPaginationHelper.getPagedReports(reports, this.activePageIndex, this.pageSize);
+    return ReportPaginationHelper.getPagedReports(
+      this.currentReports,
+      this.activePageIndex,
+      this.pageSize,
+    );
+  }
+
+  selectRegion(region: 'TW' | 'US'): void {
+    this.activeRegion = region;
+    this.activePageIndex = 0;
   }
 
   selectPage(index: number): void {
