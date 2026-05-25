@@ -4,6 +4,7 @@ import { TsmcIndustryWhitepaper20260507 } from './report-detail/2330-tsmc-indust
 import { NovatekIndustryWhitepaper20260510 } from './report-detail/4916-novatek-industry-whitepaper-20260510/4916-novatek-industry-whitepaper-20260510';
 import { BksyIndustryWhitepaper20260507 } from './report-detail/bksy-industry-whitepaper-20260507/bksy-industry-whitepaper-20260507';
 import { CegIndustryWhitepaper20260511 } from './report-detail/ceg-industry-whitepaper-20260511/ceg-industry-whitepaper-20260511';
+import { AcctonIndustryWhitepaper20260525 } from './report-detail/2345-accton-industry-whitepaper-20260525/2345-accton-industry-whitepaper-20260525';
 import { CompeqIndustryWhitepaper20260519 } from './report-detail/2313-compeq-industry-whitepaper-20260519/2313-compeq-industry-whitepaper-20260519';
 import { KingslideIndustryWhitepaper20260525 } from './report-detail/2059-kingslide-industry-whitepaper-20260525/2059-kingslide-industry-whitepaper-20260525';
 import { DproIndustryWhitepaper20260522 } from './report-detail/dpro-industry-whitepaper-20260522/dpro-industry-whitepaper-20260522';
@@ -31,6 +32,10 @@ export const stocksRoutes: Routes = [
   {
     path: 'stocks/2059-kingslide-industry-whitepaper-20260525',
     component: KingslideIndustryWhitepaper20260525,
+  },
+  {
+    path: 'stocks/2345-accton-industry-whitepaper-20260525',
+    component: AcctonIndustryWhitepaper20260525,
   },
   {
     path: 'stocks/2313-compeq-industry-whitepaper-20260519',

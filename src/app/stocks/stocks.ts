@@ -27,6 +27,13 @@ export class Stocks {
       label: '一般庫存分析',
       reports: [
         {
+          title: '智邦 (2345) 產業策略白皮書',
+          date: '2026-05-25',
+          path: '/stocks/2345-accton-industry-whitepaper-20260525',
+          summary:
+            '依最新股價、2025 年報、2026 月營收、102.4T / 800G AI 網通與資料中心升級主軸製作。',
+        },
+        {
           title: '川湖 (2059) 產業策略白皮書',
           date: '2026-05-25',
           path: '/stocks/2059-kingslide-industry-whitepaper-20260525',
