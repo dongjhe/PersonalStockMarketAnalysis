@@ -21,6 +21,18 @@ export class Stocks {
       label: '一般庫存分析',
       reports: [
         {
+          title: '川湖 (2059) 產業策略白皮書',
+          date: '2026-05-25',
+          path: '/stocks/2059-kingslide-industry-whitepaper-20260525',
+          summary: '依 2025 年報、2026 Q1 法說、AI 伺服器導軌、機櫃升級與北美產能佈局製作。',
+        },
+        {
+          title: 'DPRO Draganfly 產業策略白皮書',
+          date: '2026-05-22',
+          path: '/stocks/dpro-industry-whitepaper-20260522',
+          summary: '依最新 Q1 2026 財報、國防/C-UAS 訂單、FPV 與公共安全應用動能製作。',
+        },
+        {
           title: '華通 (2313) 產業策略白皮書',
           date: '2026-05-19',
           path: '/stocks/2313-compeq-industry-whitepaper-20260519',
