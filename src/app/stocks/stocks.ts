@@ -16,10 +16,11 @@ interface StockReportGroup extends PortfolioReportGroup {
 })
 export class Stocks {
   readonly intro = '這裡集中所有個股專頁。';
+  private readonly regionStorageKey = 'stocks.activeRegion';
 
   readonly pageSize = 10;
   activePageIndex = 0;
-  activeRegion: 'TW' | 'US' = 'TW';
+  activeRegion: 'TW' | 'US' = this.loadActiveRegion();
 
   readonly reportGroups: StockReportGroup[] = [
     {
@@ -63,6 +64,12 @@ export class Stocks {
       region: 'US',
       label: '一般庫存分析',
       reports: [
+        {
+          title: 'FLY Firefly Aerospace 產業策略白皮書',
+          date: '2026-05-26',
+          path: '/stocks/fly-industry-whitepaper-20260526',
+          summary: '依最新盤前大漲、德州製造基地擴建、Alpha/Beta/Gamma 與月球/軌道任務鏈製作。',
+        },
         {
           title: 'DPRO Draganfly 產業策略白皮書',
           date: '2026-05-22',
@@ -116,9 +123,27 @@ export class Stocks {
     );
   }
 
+  private loadActiveRegion(): 'TW' | 'US' {
+    if (typeof window === 'undefined') {
+      return 'TW';
+    }
+
+    const stored = window.localStorage.getItem(this.regionStorageKey);
+    return stored === 'US' ? 'US' : 'TW';
+  }
+
+  private saveActiveRegion(region: 'TW' | 'US'): void {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    window.localStorage.setItem(this.regionStorageKey, region);
+  }
+
   selectRegion(region: 'TW' | 'US'): void {
     this.activeRegion = region;
     this.activePageIndex = 0;
+    this.saveActiveRegion(region);
   }
 
   selectPage(index: number): void {

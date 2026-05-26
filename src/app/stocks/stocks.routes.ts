@@ -9,6 +9,7 @@ import { CompeqIndustryWhitepaper20260519 } from './report-detail/2313-compeq-in
 import { KingslideIndustryWhitepaper20260525 } from './report-detail/2059-kingslide-industry-whitepaper-20260525/2059-kingslide-industry-whitepaper-20260525';
 import { DproIndustryWhitepaper20260522 } from './report-detail/dpro-industry-whitepaper-20260522/dpro-industry-whitepaper-20260522';
 import { TslaIndustryWhitepaper20260507 } from './report-detail/tsla-industry-whitepaper-20260507/tsla-industry-whitepaper-20260507';
+import { FlyIndustryWhitepaper20260526 } from './report-detail/fly-industry-whitepaper-20260526/fly-industry-whitepaper-20260526';
 import { Stocks } from './stocks';
 
 export const stocksRoutes: Routes = [
@@ -48,6 +49,10 @@ export const stocksRoutes: Routes = [
   {
     path: 'stocks/dpro-industry-whitepaper-20260522',
     component: DproIndustryWhitepaper20260522,
+  },
+  {
+    path: 'stocks/fly-industry-whitepaper-20260526',
+    component: FlyIndustryWhitepaper20260526,
   },
   { path: 'stocks/:slug', component: ReportDetail },
 ];
