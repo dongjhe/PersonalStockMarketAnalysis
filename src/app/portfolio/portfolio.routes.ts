@@ -11,9 +11,19 @@ import { ArkInventoryWaterLevel20260516 } from './report-detail/ark-inventory-wa
 import { ArkInventoryWaterLevel20260518 } from './report-detail/ark-inventory-water-level-20260518/ark-inventory-water-level-20260518';
 import { ArkInventoryWaterLevel20260519 } from './report-detail/ark-inventory-water-level-20260519/ark-inventory-water-level-20260519';
 import { ArkInventoryWaterLevel20260520 } from './report-detail/ark-inventory-water-level-20260520/ark-inventory-water-level-20260520';
+import { ArkInventoryWaterLevel20260601 } from './report-detail/ark-inventory-water-level-20260601/ark-inventory-water-level-20260601';
+import { ArkInventoryWaterLevel20260528 } from './report-detail/ark-inventory-water-level-20260528/ark-inventory-water-level-20260528';
 
 export const portfolioRoutes: Routes = [
   { path: 'portfolio', component: Portfolio },
+  {
+    path: 'portfolio/ark-inventory-water-level-20260601',
+    component: ArkInventoryWaterLevel20260601,
+  },
+  {
+    path: 'portfolio/ark-inventory-water-level-20260528',
+    component: ArkInventoryWaterLevel20260528,
+  },
   {
     path: 'portfolio/ark-inventory-water-level-20260520',
     component: ArkInventoryWaterLevel20260520,

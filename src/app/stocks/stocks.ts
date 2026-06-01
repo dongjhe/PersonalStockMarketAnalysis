@@ -28,6 +28,13 @@ export class Stocks {
       label: '一般庫存分析',
       reports: [
         {
+          title: '英業達 (2356) 產業策略白皮書',
+          date: '2026-06-01',
+          path: '/stocks/2356-inventec-industry-whitepaper-20260601',
+          summary:
+            '依最新官網與 2026 Q1 財報，分析 AI 伺服器、智能終端、全球 ODM 與新事業升級路徑。',
+        },
+        {
           title: '智邦 (2345) 產業策略白皮書',
           date: '2026-05-25',
           path: '/stocks/2345-accton-industry-whitepaper-20260525',
