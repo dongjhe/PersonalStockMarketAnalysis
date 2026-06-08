@@ -11,6 +11,7 @@ import { DproIndustryWhitepaper20260522 } from './report-detail/dpro-industry-wh
 import { TslaIndustryWhitepaper20260507 } from './report-detail/tsla-industry-whitepaper-20260507/tsla-industry-whitepaper-20260507';
 import { FlyIndustryWhitepaper20260526 } from './report-detail/fly-industry-whitepaper-20260526/fly-industry-whitepaper-20260526';
 import { InventecIndustryWhitepaper20260601 } from './report-detail/2356-inventec-industry-whitepaper-20260601/2356-inventec-industry-whitepaper-20260601';
+import { AxtiIndustryWhitepaper20260605 } from './report-detail/axti-industry-whitepaper-20260605/axti-industry-whitepaper-20260605';
 import { Stocks } from './stocks';
 
 export const stocksRoutes: Routes = [
@@ -58,6 +59,10 @@ export const stocksRoutes: Routes = [
   {
     path: 'stocks/2356-inventec-industry-whitepaper-20260601',
     component: InventecIndustryWhitepaper20260601,
+  },
+  {
+    path: 'stocks/axti-industry-whitepaper-20260605',
+    component: AxtiIndustryWhitepaper20260605,
   },
   { path: 'stocks/:slug', component: ReportDetail },
 ];

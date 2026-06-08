@@ -28,6 +28,12 @@ export class Portfolio {
       reports: [
         {
           title: '方舟複盤｜台美股庫存與水位分析',
+          date: '2026-06-05',
+          path: '/portfolio/ark-inventory-water-level-20260605',
+          summary: '依最新台美股庫存整理，更新 17 / 9 檔持股結構、66.6% 持股配置與調節判斷。',
+        },
+        {
+          title: '方舟複盤｜台美股庫存與水位分析',
           date: '2026-06-01',
           path: '/portfolio/ark-inventory-water-level-20260601',
           summary: '依最新台美股庫存整理，更新 16 / 10 檔持股結構、67% 持股配置與操作判斷。',

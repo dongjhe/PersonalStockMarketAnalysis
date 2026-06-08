@@ -72,6 +72,12 @@ export class Stocks {
       label: '一般庫存分析',
       reports: [
         {
+          title: 'AXTI AXT 產業策略白皮書',
+          date: '2026-06-05',
+          path: '/stocks/axti-industry-whitepaper-20260605',
+          summary: '依最新股價、Q1 2026 財報、AI 光通訊、InP 擴產與化合物半導體趨勢製作。',
+        },
+        {
           title: 'FLY Firefly Aerospace 產業策略白皮書',
           date: '2026-05-26',
           path: '/stocks/fly-industry-whitepaper-20260526',
